@@ -1,14 +1,12 @@
 <?php
 
-$con = mysqli_connect("localhost", "root", "", "certgen")or die(mysqli_error($con));
+$con = pg_connect("host=ec2-54-160-120-28.compute-1.amazonaws.com port=5432 dbname=d2ib5a7lhgeh8c user=yfxarbzyzkexkk password=2006061801baaaaf230e4d2ee2a707686f3ea03f3023d150ddbd88ea0ad77751");
 if(isset($_POST['name'])){
 	$name = $_POST['name'];
-        $name = mysqli_real_escape_string($con,$name);
         $email = $_POST['email'];
-        $email = mysqli_real_escape_string($con,$email);
         echo $name."<br>".$email."<br>";
         $query = "INSERT INTO users(name,email) VALUES('" . $name . "','" . $email . "')";
-        mysqli_query($con, $query) or die(mysqli_error($con));
+        pg_query($con, $query);
  
 }
 else{
