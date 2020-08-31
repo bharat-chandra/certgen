@@ -4,8 +4,10 @@ if(isset($_POST['name'])){
 	$name = $_POST['name'];
         $email = $_POST['email'];
         $query = "INSERT INTO users(name,email) VALUES('" . $name . "','" . $email . "')";
-        pg_query($con, $query)or die(pg_errormessage($connection));
- 
+        $result = pg_query($con, $query) or iferror($name);
+ 	if($result){
+		ifnoerror($name);
+	}
 }
 else{
 	$name_get = $_GET['name'];
@@ -18,12 +20,23 @@ else{
 </head>
 <body>
 <?php
+function iferror($name){
 if(isset($_POST['name'])){
-
 	echo "<a href=\"render.php?name=$name\" download><img src=\"render.php?name=$name\" alt=\"hmmm !!!\" height=\"550px\" width=\"850px\"></a>"."<br>"."<h3>tap on image to download 😎🎉</h3>";
+echo "<br>"."query unsucess , but no issues !!!";
 }
 else{
 echo "<a href=\"render.php?name=$name_get\" download><img src=\"render.php?name=$name_get\" alt=\"hmmm !!!\" height=\"550px\" width=\"850px\"></a>"."<br>"."<h3>tap on image to download 😎🎉</h3>";
+}
+}
+function ifnoerror($name){
+if(isset($_POST['name'])){
+	echo "<a href=\"render.php?name=$name\" download><img src=\"render.php?name=$name\" alt=\"hmmm !!!\" height=\"550px\" width=\"850px\"></a>"."<br>"."<h3>tap on image to download 😎🎉</h3>";
+echo "<br>"."query success";
+}
+else{
+echo "<a href=\"render.php?name=$name_get\" download><img src=\"render.php?name=$name_get\" alt=\"hmmm !!!\" height=\"550px\" width=\"850px\"></a>"."<br>"."<h3>tap on image to download 😎🎉</h3>";
+}
 }
 ?>
 </body>
