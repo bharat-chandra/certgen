@@ -1,10 +1,8 @@
 <?php
-
-$con = pg_connect("host=ec2-54-160-120-28.compute-1.amazonaws.com port=5432 dbname=d2ib5a7lhgeh8c user=yfxarbzyzkexkk password=2006061801baaaaf230e4d2ee2a707686f3ea03f3023d150ddbd88ea0ad77751")or die(pg_errormessage($connection));
 if(isset($_POST['name'])){
+    $con = pg_connect("host=ec2-54-160-120-28.compute-1.amazonaws.com port=5432 dbname=d2ib5a7lhgeh8c user=yfxarbzyzkexkk password=2006061801baaaaf230e4d2ee2a707686f3ea03f3023d150ddbd88ea0ad77751")or die(pg_errormessage($connection));
 	$name = $_POST['name'];
         $email = $_POST['email'];
-        echo $name."<br>".$email."<br>";
         $query = "INSERT INTO users(name,email) VALUES('" . $name . "','" . $email . "')";
         pg_query($con, $query)or die(pg_errormessage($connection));
  
